@@ -1,5 +1,4 @@
-require "spec_helper"
-require "app/models/linter/base"
+require "rails_helper"
 
 module Linter
   class Test < Base
