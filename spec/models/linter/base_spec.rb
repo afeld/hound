@@ -32,10 +32,9 @@ describe Linter::Base do
   describe "#enabled?" do
     context "when the hound config is enabled for the given language" do
       it "returns true" do
-        hound_config = double("HoundConfig", enabled_for?: true)
         linter = Linter::Test.new(
-          hound_config: hound_config,
-          build: double,
+          hound_config: double("HoundConfig", enabled_for?: true),
+          build: double("Build", repo: double("Repo")),
           repository_owner_name: "foo",
         )
 
@@ -45,10 +44,9 @@ describe Linter::Base do
 
     context "when the hound config is disabled for the given language" do
       it "returns false" do
-        hound_config = double("HoundConfig", enabled_for?: false)
         linter = Linter::Test.new(
-          hound_config: hound_config,
-          build: double,
+          hound_config: double("HoundConfig", enabled_for?: false),
+          build: double("Build", repo: double("Repo")),
           repository_owner_name: "foo",
         )
 
@@ -58,10 +56,9 @@ describe Linter::Base do
 
     context "when the hound config is disabled for the given language" do
       it "returns false" do
-        hound_config = double("HoundConfig", enabled_for?: false)
         linter = Linter::Test.new(
-          hound_config: hound_config,
-          build: double,
+          hound_config: double("HoundConfig", enabled_for?: false),
+          build: double("Build", repo: double("Repo")),
           repository_owner_name: "foo",
         )
 
