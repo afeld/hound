@@ -149,6 +149,7 @@ describe Config::Ruby do
         },
       },
     )
+
     Config::Ruby.new(hound_config, "ruby")
   end
 end
