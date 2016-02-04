@@ -19,7 +19,7 @@ describe Config::Eslint do
   end
 
   describe "#serialize" do
-    it "serializes the content into YAML" do
+    it "serializes the content into JSON" do
       raw_config = <<-EOS.strip_heredoc
         rules:
           quotes: [2, "double"]
@@ -28,7 +28,7 @@ describe Config::Eslint do
       config = build_config(commit)
 
       expect(config.serialize).to eq(
-        "---\nrules:\n  quotes:\n  - 2\n  - double\n",
+        "{\"rules\":{\"quotes\":[2,\"double\"]}}",
       )
     end
   end

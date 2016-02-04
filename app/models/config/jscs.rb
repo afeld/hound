@@ -1,19 +1,21 @@
 module Config
   class Jscs < Base
-    DEFAULT_CONTENT = {}.freeze
-
     def content
-      @content ||= super || DEFAULT_CONTENT
+      @content ||= super || default_content
     end
 
     def serialize(data = content)
-      data.to_yaml
+      ActiveSupport::JSON.encode(data)
     end
 
     private
 
     def parse(file_content)
       Config::Parser.yaml(file_content)
+    end
+
+    def default_content
+      {}
     end
   end
 end

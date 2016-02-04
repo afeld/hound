@@ -24,7 +24,7 @@ describe Config::Jscs do
       commit = stubbed_commit("config/.jscsrc" => raw_config)
       config = build_config(commit)
 
-      expect(config.serialize).to eq "---\ndisallowKeywordsInComments: true\n"
+      expect(config.serialize).to eq "{\"disallowKeywordsInComments\":true}"
     end
   end
 
