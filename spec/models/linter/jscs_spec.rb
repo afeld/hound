@@ -62,13 +62,17 @@ describe Linter::Jscs do
         pull_request_number: build.pull_request_number,
         patch: commit_file.patch,
         content: commit_file.content,
-        config: {},
+        config: "{}",
       )
     end
   end
 
   def stub_jscs_config(content: {})
-    stubbed_jscs_config = double("JscsConfig", content: content)
+    stubbed_jscs_config = double(
+      "JscsConfig",
+      content: content,
+      serialize: content.to_s,
+    )
     allow(Config::Jscs).to receive(:new).and_return(stubbed_jscs_config)
 
     stubbed_jscs_config

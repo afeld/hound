@@ -1,5 +1,4 @@
-require "spec_helper"
-require "app/models/linter/base"
+require "rails_helper"
 
 module Linter
   class Test < Base
@@ -34,7 +33,7 @@ describe Linter::Base do
     context "when the hound config is enabled for the given language" do
       it "returns true" do
         hound_config = double("HoundConfig", enabled_for?: true)
-        linter = Linter::Test.new(
+        linter = Linter::Base.new(
           hound_config: hound_config,
           build: double,
           repository_owner_name: "foo",
@@ -47,7 +46,7 @@ describe Linter::Base do
     context "when the hound config is disabled for the given language" do
       it "returns false" do
         hound_config = double("HoundConfig", enabled_for?: false)
-        linter = Linter::Test.new(
+        linter = Linter::Base.new(
           hound_config: hound_config,
           build: double,
           repository_owner_name: "foo",
@@ -60,7 +59,7 @@ describe Linter::Base do
     context "when the hound config is disabled for the given language" do
       it "returns false" do
         hound_config = double("HoundConfig", enabled_for?: false)
-        linter = Linter::Test.new(
+        linter = Linter::Base.new(
           hound_config: hound_config,
           build: double,
           repository_owner_name: "foo",

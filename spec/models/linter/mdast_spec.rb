@@ -54,13 +54,17 @@ describe Linter::Mdast do
         pull_request_number: build.pull_request_number,
         patch: commit_file.patch,
         content: commit_file.content,
-        config: {},
+        config: "{}",
       )
     end
   end
 
   def stub_mdast_config(content: {})
-    stubbed_mdast_config = double("MdastConfig", content: content)
+    stubbed_mdast_config = double(
+      "MdastConfig",
+      content: content,
+      serialize: content.to_s,
+    )
     allow(Config::Mdast).to receive(:new).and_return(stubbed_mdast_config)
 
     stubbed_mdast_config

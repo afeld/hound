@@ -3,7 +3,11 @@ module Config
     DEFAULT_CONTENT = {}.freeze
 
     def content
-      super || DEFAULT_CONTENT
+      @content ||= super || DEFAULT_CONTENT
+    end
+
+    def serialize(data = content)
+      data.to_yaml
     end
 
     private

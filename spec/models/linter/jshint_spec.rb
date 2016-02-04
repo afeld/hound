@@ -94,7 +94,7 @@ describe Linter::Jshint do
         pull_request_number: build.pull_request_number,
         patch: commit_file.patch,
         content: commit_file.content,
-        config: {},
+        config: "{}",
       )
     end
   end
@@ -103,6 +103,7 @@ describe Linter::Jshint do
     default_options = {
       content: {},
       excluded_files: [],
+      serialize: "{}",
     }
     stubbed_jshint_config = double(
       "JshintConfig",

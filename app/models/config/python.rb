@@ -1,7 +1,11 @@
 module Config
   class Python < Base
     def content
-      @content ||= super || default_content
+      @content ||= super.presence || default_content
+    end
+
+    def serialize(data = content)
+      IniFile.new(content: data).to_s
     end
 
     private

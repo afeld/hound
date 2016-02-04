@@ -6,6 +6,10 @@ module Config
       super || DEFAULT_CONTENT
     end
 
+    def serialize(data = content)
+      data.to_yaml
+    end
+
     private
 
     def parse(file_content)

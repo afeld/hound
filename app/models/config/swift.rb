@@ -1,5 +1,9 @@
 module Config
   class Swift < Base
+    def serialize(data = content)
+      data.to_yaml
+    end
+
     private
 
     def parse(file_content)

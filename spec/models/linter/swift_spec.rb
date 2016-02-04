@@ -46,13 +46,17 @@ describe Linter::Swift do
         pull_request_number: build.pull_request_number,
         patch: commit_file.patch,
         content: commit_file.content,
-        config: {},
+        config: "{}",
       )
     end
   end
 
   def stub_swift_config(config = {})
-    stubbed_swift_config = double("SwiftConfig", content: config)
+    stubbed_swift_config = double(
+      "SwiftConfig",
+      content: config,
+      serialize: config.to_s,
+    )
     allow(Config::Swift).to receive(:new).and_return(stubbed_swift_config)
 
     stubbed_swift_config

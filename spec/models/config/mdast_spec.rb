@@ -18,6 +18,20 @@ describe Config::Mdast do
     end
   end
 
+  describe "#serialize" do
+    it "serializes the content into YAML" do
+      raw_config = <<-EOS.strip_heredoc
+        {
+        "heading-style": "setext"
+        }
+      EOS
+      commit = stubbed_commit("config/.mdastrc" => raw_config)
+      config = build_config(commit)
+
+      expect(config.serialize).to eq "{\"heading-style\":\"setext\"}"
+    end
+  end
+
   def build_config(commit)
     hound_config = double(
       "HoundConfig",

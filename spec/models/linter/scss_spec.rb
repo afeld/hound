@@ -46,13 +46,17 @@ describe Linter::Scss do
         pull_request_number: build.pull_request_number,
         patch: commit_file.patch,
         content: commit_file.content,
-        config: {},
+        config: "{}",
       )
     end
   end
 
   def stub_scss_config(config = {})
-    stubbed_scss_config = double("ScssConfig", content: config)
+    stubbed_scss_config = double(
+      "ScssConfig",
+      content: config,
+      serialize: config.to_s,
+    )
     allow(Config::Scss).to receive(:new).and_return(stubbed_scss_config)
 
     stubbed_scss_config

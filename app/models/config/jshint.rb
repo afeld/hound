@@ -16,6 +16,10 @@ module Config
       ]
     end
 
+    def serialize
+      ActiveSupport::JSON.encode(content)
+    end
+
     private
 
     def parse(file_content)

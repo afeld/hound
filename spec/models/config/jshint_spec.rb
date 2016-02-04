@@ -42,6 +42,20 @@ describe Config::Jshint do
     end
   end
 
+  describe "#serialize" do
+    it "serializes the parsed content into JSON" do
+      raw_config = <<-EOS.strip_heredoc
+        {
+          "maxlen": 80
+        }
+      EOS
+      commit = stubbed_commit("config/jshint.json" => raw_config)
+      config = build_config(commit)
+
+      expect(config.serialize).to eq "{\"maxlen\":80}"
+    end
+  end
+
   describe "#linter_names" do
     it "returns the names that the linter is accessible under" do
       commit = stubbed_commit({})

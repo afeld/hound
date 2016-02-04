@@ -16,6 +16,18 @@ describe Config::Jscs do
     end
   end
 
+  describe "#serialize" do
+    it "serializes the parsed content into YAML" do
+      raw_config = <<-EOS.strip_heredoc
+        { "disallowKeywordsInComments": true }
+      EOS
+      commit = stubbed_commit("config/.jscsrc" => raw_config)
+      config = build_config(commit)
+
+      expect(config.serialize).to eq "---\ndisallowKeywordsInComments: true\n"
+    end
+  end
+
   def build_config(commit)
     hound_config = double(
       "HoundConfig",

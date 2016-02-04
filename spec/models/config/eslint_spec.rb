@@ -2,6 +2,7 @@ require "spec_helper"
 require "app/models/config/base"
 require "app/models/config/eslint"
 require "app/models/config/parser"
+require "yaml"
 
 describe Config::Eslint do
   describe "#content" do
@@ -14,6 +15,21 @@ describe Config::Eslint do
       config = build_config(commit)
 
       expect(config.content).to eq Config::Parser.yaml(raw_config)
+    end
+  end
+
+  describe "#serialize" do
+    it "serializes the content into YAML" do
+      raw_config = <<-EOS.strip_heredoc
+        rules:
+          quotes: [2, "double"]
+      EOS
+      commit = stubbed_commit("config/.eslintrc" => raw_config)
+      config = build_config(commit)
+
+      expect(config.serialize).to eq(
+        "---\nrules:\n  quotes:\n  - 2\n  - double\n",
+      )
     end
   end
 

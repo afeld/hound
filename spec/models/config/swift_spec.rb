@@ -17,6 +17,19 @@ describe Config::Swift do
     end
   end
 
+  describe "#serialize" do
+    it "serializes the parsed content into YAML" do
+      raw_config = <<-EOS.strip_heredoc
+        disabled_rules:
+          - colon
+      EOS
+      commit = stubbed_commit("config/swiftlint.yml" => raw_config)
+      config = build_config(commit)
+
+      expect(config.serialize).to eq "---\ndisabled_rules:\n- colon\n"
+    end
+  end
+
   def build_config(commit)
     hound_config = double(
       "HoundConfig",

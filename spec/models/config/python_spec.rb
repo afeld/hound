@@ -30,6 +30,19 @@ describe Config::Python do
     end
   end
 
+  describe "#serialize" do
+    it "returns the parsed content back to INI" do
+      raw_config = <<-EOS.strip_heredoc
+        [flake8]
+        max-line-length = 160
+      EOS
+      commit = stubbed_commit("config/python.ini" => raw_config)
+      config = build_config(commit)
+
+      expect(config.serialize).to eq raw_config
+    end
+  end
+
   def build_config(commit)
     hound_config = double(
       "HoundConfig",
