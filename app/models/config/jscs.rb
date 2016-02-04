@@ -1,6 +1,6 @@
 module Config
   class Jscs < Base
-    DEFAULT_CONTENT = {}
+    DEFAULT_CONTENT = {}.freeze
 
     def content
       super || DEFAULT_CONTENT
