@@ -7,7 +7,7 @@ module Config
     private
 
     def parse(file_content)
-      Config::Parser.yaml(file_content)
+      Config::Parser.ini(file_content)
     end
 
     def default_content

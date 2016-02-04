@@ -5,7 +5,7 @@ require "app/models/config/parser"
 
 describe Config::Python do
   describe "#content" do
-    it "parses the configuration using YAML" do
+    it "returns the parsed configuration" do
       raw_config = <<-EOS.strip_heredoc
         [flake8]
         max-line-length = 160
@@ -13,7 +13,7 @@ describe Config::Python do
       commit = stubbed_commit("config/python.ini" => raw_config)
       config = build_config(commit)
 
-      expect(config.content).to eq Config::Parser.yaml(raw_config)
+      expect(config.content).to eq("flake8" => { "max-line-length"=> 160 })
     end
 
     context "when there is no config content for the given linter" do
